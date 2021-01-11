@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      href="http://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="../Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="./netflix.css" rel="stylesheet" />
+    <link
+      rel="shortcut icon"
+      type="image/jpg"
+      href="../images/netflixIcon.png"
+    />
+    <link href="./carousel.css" rel="stylesheet" />
+
+    <title>Netflix - Actors</title>
+  </head>
+  <body>
+    <div id="actorsDiv">Test</div>
+
+    <div class="pagination" id="paginacao"></div>
+
+    <nav class="navbar navbar-dark navbar-expand-md fixed-top" id="navbar-main">
+      <!-- Conteúdo do navbar -->
+      <a class="navbar-brand" href="./netflix.html"
+        ><img id="logo-navbar" src="../images/netflix_home2.png"
+      /></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#conteudoNavbarSuportado"
+        aria-controls="conteudoNavbarSuportado"
+        aria-expanded="false"
+        aria-label="Alterna navegação"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="./netflix.html"
+              >Home <span class="sr-only">(página atual)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./titles.html">Titles</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="./actors.html">Actors</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./favorites.html">My List</a>
+          </li>
+        </ul>
+
+        <div id="sec-div">
+          <ul class="navbar-nav mr-auto">
+            <li>
+              <form class="form-inline my-2 my-lg-0" style="height: 40px">
+                <img
+                  class="src-logo"
+                  id="src-logo-1"
+                  src="../images/search_logo.png"
+                />
+                <input
+                  id="search-input"
+                  class="form-control mr-sm-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Pesquisar"
+                />
+                <button id="src-btn">
+                  <img
+                    class="src-logo"
+                    id="src-logo-2"
+                    src="../images/search_logo.png"
+                  />
+                </button>
+              </form>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <img class="drop-logo" src="../images/adult_1_logo.png" />
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#"
+                  ><img class="drop-logo" src="../images/adult_2_logo.png" />
+                  John
+                </a>
+                <a class="dropdown-item" href="#"
+                  ><img class="drop-logo" src="../images/adult_3_logo.png" />
+                  Jenny
+                </a>
+                <a class="dropdown-item" href="#"
+                  ><img class="drop-logo" src="../images/kid_logo.png" /> Little
+                  Joey
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Account</a>
+                <a class="dropdown-item" href="#">Help</a>
+                <a class="dropdown-item" href="#">Exit</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid" id="main-div"></div>
+    <nav class="navbar navbar-dark navbar-expand-md fixed-bottom">
+      <div class="container-fluid">
+        <div class="navbar-text small">
+          &copy;ITW2020 - Introdução às Tecnologias Web - Trabalho Prático Final
+        </div>
+        <div class="navbar-right navbar-text small d-sm-none d-md-block">
+          <a href="http://www.ua.pt" title="Universidade de Aveiro"
+            >Universidade de Aveiro</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <script src="../Scripts/jquery-3.5.1.min.js"></script>
+    <script src="../Scripts/bootstrap.bundle.min.js"></script>
+    <script src="../Scripts/knockout-3.5.1.js"></script>
+    <script src="./actors.js"></script>
+  </body>
+</html>
