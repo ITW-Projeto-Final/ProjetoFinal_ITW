@@ -18,11 +18,9 @@ $(document).ready(function () {
 
   $(document).ajaxStart(function () {
     $("#loading").show();
-    console.log("AJAX start");
   });
 
   $(document).ajaxStop(function () {
     $("#loading").hide();
-    console.log("AJAX STOP");
   });
 });

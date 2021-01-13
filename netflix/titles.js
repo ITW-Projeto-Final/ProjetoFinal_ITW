@@ -18,7 +18,18 @@ function searchTitle(searchText) {
     },
   });
 }
-//fetchTitleImage("Inception");
+
+function previousPage() {
+  if (paginaAtual > 1) {
+    renderPagination(paginaAtual - 1);
+  }
+}
+
+function nextPage() {
+  if (paginaAtual < 548) {
+    renderPagination(paginaAtual + 1);
+  }
+}
 
 function fetchTitles(pageNumber) {
   $.ajax({
@@ -65,6 +76,7 @@ function fetchTitles(pageNumber) {
 }
 
 function renderPagination(paginationNumber) {
+  $("#loading").show();
   paginaAtual = paginationNumber;
 
   $.ajax({
@@ -72,7 +84,7 @@ function renderPagination(paginationNumber) {
     type: "get",
     data: {
       page: paginationNumber,
-      pagesize: 50,
+      pagesize: 51,
     },
 
     success: (data) => {
@@ -82,11 +94,35 @@ function renderPagination(paginationNumber) {
       paginationHTML = `<div class="pagination" id="paginacao">
                         <a onclick='previousPage()'>&laquo;</a>`;
 
-      for (var i = 1; i <= totalPages; i++) {
+      //PAGINAÇÃO PARA AS 5 PRIMEIRAS PÁGINAS
+      for (var i = 1; i <= 5; i++) {
         const pageHTML = `
           <a class='pages' id='pagination${i}' onclick='renderPagination(${i})'>${i}</a>        
         `;
+        paginationHTML += pageHTML;
+      }
+      paginationHTML += `
+      <a class='pages''>...</a>        
+    `;
 
+      if (paginationNumber >= 5 && paginationNumber < 115) {
+        for (var i = paginationNumber; i <= paginationNumber + 5; i++) {
+          const pageHTML = `
+            <a class='pages' id='pagination${i}' onclick='renderPagination(${i})'>${i}</a>        
+          `;
+          paginationHTML += pageHTML;
+        }
+      }
+
+      paginationHTML += `
+      <a class='pages''>...</a>        
+    `;
+
+      //PAGINAÇÃO PARA AS 5 ÚLTIMAS PÁGINAS
+      for (var i = totalPages - 5; i <= totalPages; i++) {
+        const pageHTML = `
+          <a class='pages' id='pagination${i}' onclick='renderPagination(${i})'>${i}</a>        
+        `;
         paginationHTML += pageHTML;
       }
       paginationHTML += `<a onclick='nextPage()'>&raquo;</a>

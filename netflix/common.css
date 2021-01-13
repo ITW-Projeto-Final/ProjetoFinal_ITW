@@ -1,7 +1,7 @@
 /* ESTILOS GERAIS DO BODY */
 
 #loading {
-  display: none;
+  display: block;
   position: absolute;
   top: 0;
   left: 0;
@@ -9,9 +9,13 @@
   width: 100vw;
   height: 100vh;
   background-color: rgba(192, 192, 192, 0.5);
-  background-image: url("https://i.stack.imgur.com/MnyxU.gif");
+  background-image: url("../images/ajax-loader_2.gif");
   background-repeat: no-repeat;
   background-position: center;
+}
+
+#paginacao {
+  margin: auto;
 }
 
 body {
@@ -52,12 +56,6 @@ i {
 
 #alt-text {
   display: none;
-}
-
-#main-div {
-  background-image: url("../images/home_img_1.jpg");
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 
 .container {

@@ -49,6 +49,7 @@ function renderPagination(paginationNumber) {
       $("#paginacao").html(paginationHTML);
 
       fetchActors(paginationNumber);
+      window.scrollTo(0, 0);
     },
 
     error: (err) => {},
