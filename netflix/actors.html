@@ -29,7 +29,7 @@
 
     <div class="pagination" id="paginacao"></div>
 
-    <nav class="navbar navbar-dark navbar-expand-md fixed-top" id="navbar-main">
+    <nav class="navbar navbar-dark navbar-expand-md fixed-top">
       <!-- Conteúdo do navbar -->
       <a class="navbar-brand" href="./netflix.html"
         ><img id="logo-navbar" src="../images/netflix_home2.png"
@@ -64,64 +64,62 @@
           </li>
         </ul>
 
-        <div id="sec-div">
-          <ul class="navbar-nav mr-auto">
-            <li>
-              <form class="form-inline my-2 my-lg-0" style="height: 40px">
+        <ul class="navbar-nav mr-right">
+          <li>
+            <form class="form-inline my-2 my-lg-0" style="height: 40px">
+              <img
+                class="src-logo"
+                id="src-logo-1"
+                src="../images/search_logo.png"
+              />
+              <input
+                id="search-input"
+                class="form-control mr-sm-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Pesquisar"
+              />
+              <button id="src-btn">
                 <img
                   class="src-logo"
-                  id="src-logo-1"
+                  id="src-logo-2"
                   src="../images/search_logo.png"
                 />
-                <input
-                  id="search-input"
-                  class="form-control mr-sm-2"
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Pesquisar"
-                />
-                <button id="src-btn">
-                  <img
-                    class="src-logo"
-                    id="src-logo-2"
-                    src="../images/search_logo.png"
-                  />
-                </button>
-              </form>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <img class="drop-logo" src="../images/adult_1_logo.png" />
+              </button>
+            </form>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <img class="drop-logo" src="../images/adult_1_logo.png" />
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#"
+                ><img class="drop-logo" src="../images/adult_2_logo.png" />
+                John
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#"
-                  ><img class="drop-logo" src="../images/adult_2_logo.png" />
-                  John
-                </a>
-                <a class="dropdown-item" href="#"
-                  ><img class="drop-logo" src="../images/adult_3_logo.png" />
-                  Jenny
-                </a>
-                <a class="dropdown-item" href="#"
-                  ><img class="drop-logo" src="../images/kid_logo.png" /> Little
-                  Joey
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Account</a>
-                <a class="dropdown-item" href="#">Help</a>
-                <a class="dropdown-item" href="#">Exit</a>
-              </div>
-            </li>
-          </ul>
-        </div>
+              <a class="dropdown-item" href="#"
+                ><img class="drop-logo" src="../images/adult_3_logo.png" />
+                Jenny
+              </a>
+              <a class="dropdown-item" href="#"
+                ><img class="drop-logo" src="../images/kid_logo.png" /> Little
+                Joey
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Account</a>
+              <a class="dropdown-item" href="#">Help</a>
+              <a class="dropdown-item" href="#">Exit</a>
+            </div>
+          </li>
+        </ul>
       </div>
     </nav>
     <div class="container-fluid" id="main-div"></div>
