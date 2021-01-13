@@ -15,4 +15,14 @@ $(document).ready(function () {
     $("#src-logo-1").css("display", "none");
     $("#src-logo-2").css("display", "block");
   });
+
+  $(document).ajaxStart(function () {
+    $("#loading").show();
+    console.log("AJAX start");
+  });
+
+  $(document).ajaxStop(function () {
+    $("#loading").hide();
+    console.log("AJAX STOP");
+  });
 });

@@ -95,6 +95,7 @@ function renderPagination(paginationNumber) {
       $("#paginacao").html(paginationHTML);
 
       fetchTitles(paginationNumber);
+      window.scrollTo(0, 0);
     },
 
     error: (err) => {},
