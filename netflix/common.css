@@ -1,22 +1,15 @@
+/* ESTILOS GERAIS DO BODY */
+
 body {
-  font-family: "Roboto", "Open Sans", sans-serif;
-  padding-top: 72px;
-  padding-bottom: 50px;
-  background-color: rgb(19, 18, 18);
+  font-family: "Open Sans", sans-serif;
+  background-color: rgb(29, 26, 26);
   color: white;
+  padding-top: 70px;
+  padding-bottom: 50px;
 }
 
 i {
   font-family: "Open Sans", sans-serif;
-}
-
-.poster-Img {
-  height: 300px;
-  width: 300px;
-}
-
-.maxH80 {
-  max-height: 80px;
 }
 
 .nav-item.active {
@@ -29,17 +22,6 @@ i {
 
 #lbl-btn {
   margin-left: 50px;
-}
-
-.bodyBtn {
-  margin-top: 300px;
-  margin-right: 20px;
-}
-
-@media screen and (max-width: 653px) {
-  .bodyBtn {
-    display: none;
-  }
 }
 
 .txt-btn {
@@ -62,14 +44,6 @@ i {
   background-image: url("../images/home_img_1.jpg");
   background-size: contain;
   background-repeat: no-repeat;
-}
-
-@media screen and (min-width: 1200px) {
-  #main-div {
-    background-image: url("../images/home_img_1.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
 }
 
 .container {
@@ -111,7 +85,7 @@ i {
 
 .dropdown-menu {
   background-color: black;
-  left: -90px;
+  left: -60px;
 }
 
 .dropdown-item {
@@ -124,29 +98,8 @@ i {
   display: none;
 }
 
-/* ------------------ PAGINAÇÃO ----------------- */
-/* Pagination links */
-.pagination a {
-  color: white;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-  transition: background-color 0.3s;
-}
-
-/* Style the active/current link */
-.pagination a.active {
-  background-color: dodgerblue;
-  color: white;
-}
-
-/* Add a grey background color on mouse-over */
-.pagination a:hover:not(.active) {
-  background-color: #ddd;
-}
-
 /* ---------NAVBAR PERSONALIZADA -----------------*/
-\.navbar {
+.navbar {
   background-color: #000000;
 }
 .navbar .navbar-brand {
@@ -271,4 +224,25 @@ i {
 .navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item.active {
   color: #ffffff;
   background-color: #000000;
+}
+
+/* ------------------ PAGINAÇÃO ----------------- */
+/* Pagination links */
+.pagination a {
+  color: white;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+/* Style the active/current link */
+.pagination a.active {
+  background-color: dodgerblue;
+  color: white;
+}
+
+/* Add a grey background color on mouse-over */
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
 }

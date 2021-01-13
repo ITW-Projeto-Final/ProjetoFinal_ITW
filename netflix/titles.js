@@ -34,18 +34,19 @@ function fetchTitles(pageNumber) {
       titlesArray = data.Titles;
       let titlesPageHTML = ``;
 
-      titlesPageHTML = `<div>
-        <div>
-            <h3 class="center"> ${data.TotalTitles} titles found </h3>
-        </div>
-        `;
+      titlesPageHTML = `<div class="titleCardsDiv">`;
       titlesArray.forEach((title) => {
-        const { Id, Name, Titles } = title;
+        const { Id, Name, Description } = title;
 
         const titleHTML = `
-              <div>
-                  <label> ${Name}, ${Id}, ${Titles}</label>
-              </div>
+        <div class="card titleCard col-md-2" style="; background-color:black">
+        <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">${Name}</h5>
+          <p class="card-text">${Description}</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
           `;
         titlesPageHTML += titleHTML;
       });
