@@ -2,20 +2,6 @@
 paginaAtual = 1;
 
 $(document).ready(function () {
-  $("#src-btn").click(function (event) {
-    event.preventDefault();
-    //if($("#search-input").)
-    $("#search-input").css("display", "block");
-    $("#src-logo-1").css("display", "block");
-    $("#src-logo-2").css("display", "none");
-    $("#search-input").focus();
-  });
-  $("body").dblclick(function () {
-    $("#search-input").css("display", "none");
-    $("#src-logo-1").css("display", "none");
-    $("#src-logo-2").css("display", "block");
-  });
-
   renderPagination(1);
   fetchActors(1);
 });
