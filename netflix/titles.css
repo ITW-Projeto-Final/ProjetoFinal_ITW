@@ -1,7 +1,10 @@
 .titleCard {
   margin: 5px;
+  flex-basis: 30%;
+  text-align: center;
 }
 
 .titleCardsDiv {
   display: flex;
+  flex-wrap: wrap;
 }

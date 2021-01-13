@@ -26,7 +26,7 @@ function fetchTitles(pageNumber) {
     type: "get",
     data: {
       page: pageNumber,
-      pagesize: 50,
+      pagesize: 51,
     },
 
     success: (data) => {
@@ -39,12 +39,12 @@ function fetchTitles(pageNumber) {
         const { Id, Name, Description } = title;
 
         const titleHTML = `
-        <div class="card titleCard col-md-2" style="; background-color:black">
-        <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card titleCard" style="; background-color:black">
+        <img class="card-img-top" src="..." alt="Image Not Available">
         <div class="card-body">
           <h5 class="card-title">${Name}</h5>
           <p class="card-text">${Description}</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <a href="#" class="btn btn-dark"">Watch Now</a>
         </div>
       </div>
           `;
