@@ -1,3 +1,4 @@
+// VARIÁVEL GLOBAL E PAGE START
 paginaAtual = 1;
 $(document).ready(() => {
   renderPagination(1);
@@ -91,14 +92,11 @@ function fetchImages() {
               "https://image.tmdb.org/t/p/original/" +
               data.results[0].poster_path;
             $(this).attr("src", image_path);
-            console.log("IF - FOUND:" + i, obj);
           } else {
-            console.log("ELSE - NOT FOUND:" + i, obj);
-            $(this).attr("src", "../images/not-available.jfif");
+            $(this).attr("src", "../images/not-available.jpg");
           }
         } else {
-          console.log("ELSE - NOT FOUND:" + i, obj);
-          $(this).attr("src", "../images/not-available.jfif");
+          $(this).attr("src", "../images/not-available.jpg");
         }
       },
     });

@@ -3,6 +3,13 @@
   margin-left: 0px;
   margin-right: 0px;
 }
+@media screen and (min-width: 800px) {
+  #titlesDiv {
+    width: 100%;
+    margin-left: 20px;
+    margin-right: 0px;
+  }
+}
 
 .titleCard {
   margin: 5px;
@@ -13,13 +20,33 @@
 .titleCardsDiv {
   display: flex;
   flex-wrap: wrap;
+  margin-left: 50px;
 }
 
 .card-img-top {
-  width: 322px;
-  height: 483px;
+  /*min-width: 322px;
+  min-height: 483px;*/
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: auto;
+}
+
+@media screen and (max-width: 800px) {
+  .card-img-top {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+  }
+  .titleCardsDiv {
+    display: block;
+    flex-wrap: wrap;
+    margin: 5px;
+  }
 }
 
 .container-fluid {
   padding: 0px;
+  overflow: hidden;
 }
