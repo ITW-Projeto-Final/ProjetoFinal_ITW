@@ -49,40 +49,9 @@ function fetchTitles(pageNumber) {
       titlesArray.forEach((title) => {
         const { Id, Name, Description } = title;
 
-        $.ajax({
-          type: "get",
-          url:
-            "https://api.themoviedb.org/3/search/movie?api_key=a77315529945efa26b94400d99db398b&language=en-US&query=" +
-            encodeURIComponent(Name) +
-            "&page=1&include_adult=true",
-          dataType: "json",
-          success: (data) => {
-            console.log(Name, encodeURIComponent(Name));
-            console.log(data);
-            console.log("---------------");
-          },
-          data: {},
-          async: false,
-        });
-
-        /*$.ajax({
-          url:
-            "https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=" +
-            encodeURIComponent(Name) +
-            "&callback=?%22",
-          type: "get",
-          success: (data) => {
-            //console.log(data);
-          },
-
-          error: (err) => {
-            console.log(err);
-          },
-        });*/
-
         const titleHTML = `
         <div class="card titleCard" style="; background-color:black">
-        <img class="card-img-top" src="..." alt="Image Not Available">
+        <img class="card-img-top" id="${Name}" src="" alt="Image Not Available">
         <div class="card-body">
           <h5 class="card-title">${Name}</h5>
           <p class="card-text">${Description}</p>
@@ -104,6 +73,24 @@ function fetchTitles(pageNumber) {
       console.log(err);
     },
   });
+  /*$(".card-img-top").attr("src") =
+  $.ajax({
+    type: "get",
+    url:
+      "https://api.themoviedb.org/3/search/movie?api_key=a77315529945efa26b94400d99db398b&language=en-US&query=" +
+      encodeURIComponent(Name) +
+      "&page=1&include_adult=true",
+    dataType: "json",
+    success: (data) => {
+      console.log(data);
+      if (data.results.length > 0) {
+        image_path =
+          "https://image.tmdb.org/t/p/original/" + data.results[0].poster_path;
+      } else {
+        console.log("NÃO POSSUI IMAGEM!");
+      }
+    },
+  });*/
 }
 
 function renderPagination(paginationNumber) {
