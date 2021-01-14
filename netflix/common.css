@@ -8,8 +8,9 @@
   z-index: 100;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(192, 192, 192, 0.5);
-  background-image: url("../images/ajax-loader_2.gif");
+  background-color: black;
+  /*background-color: rgba(192, 192, 192, 0.5);*/
+  background-image: url("../images/ajaxLoader.gif");
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -28,6 +29,17 @@ body {
 
 i {
   font-family: "Open Sans", sans-serif;
+}
+.actorCard {
+  margin: 5px;
+  flex-basis: 30%;
+  text-align: center;
+}
+
+.actorsDiv {
+  margin-left: 80px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .nav-item.active {

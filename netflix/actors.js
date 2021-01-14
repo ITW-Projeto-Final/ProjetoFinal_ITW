@@ -36,15 +36,39 @@ function renderPagination(paginationNumber) {
       paginationHTML = `<div class="pagination" id="paginacao">
                         <a onclick='previousPage()'>&laquo;</a>`;
 
-      for (var i = 1; i <= totalPages; i++) {
+      //PAGINAÇÃO PARA AS 5 PRIMEIRAS PÁGINAS
+      for (var i = 1; i <= 5; i++) {
         const pageHTML = `
-          <a class='pages' id='pagination${i}' onclick='renderPagination(${i})'>${i}</a>        
-        `;
+    <a class='pages' id='pagination${i}' onclick='renderPagination(${i})'>${i}</a>        
+  `;
+        paginationHTML += pageHTML;
+      }
+      paginationHTML += `
+<a class='pages''>...</a>        
+`;
 
+      if (paginationNumber >= 5 && paginationNumber < 115) {
+        for (var i = paginationNumber; i <= paginationNumber + 5; i++) {
+          const pageHTML = `
+      <a class='pages' id='pagination${i}' onclick='renderPagination(${i})'>${i}</a>        
+    `;
+          paginationHTML += pageHTML;
+        }
+      }
+
+      paginationHTML += `
+<a class='pages''>...</a>        
+`;
+
+      //PAGINAÇÃO PARA AS 5 ÚLTIMAS PÁGINAS
+      for (var i = totalPages - 5; i <= totalPages; i++) {
+        const pageHTML = `
+    <a class='pages' id='pagination${i}' onclick='renderPagination(${i})'>${i}</a>        
+  `;
         paginationHTML += pageHTML;
       }
       paginationHTML += `<a onclick='nextPage()'>&raquo;</a>
-                        </div>`;
+                  </div>`;
 
       $("#paginacao").html(paginationHTML);
 
@@ -66,22 +90,25 @@ function fetchActors(pageNumber) {
     },
 
     success: (data) => {
+      console.log(data);
       actorsArray = data.Actors;
       let actorsPageHTML = ``;
 
-      actorsPageHTML = `<div>
-      <div>
-          <h3 class="center"> ${data.TotalActors} users found </h3>
-      </div>
+      actorsPageHTML = `<div class="actorsDiv">
       `;
       actorsArray.forEach((actor) => {
         const { Id, Name, Titles } = actor;
 
         const actorHTML = `
-            <div>
-                <label> ${Name}, ${Id}, ${Titles}</label>
-            </div>
-        `;
+        <div class="card actorCard" style="; background-color:black">
+        <img class="card-img-top" src="..." alt="Image Not Available">
+        <div class="card-body">
+          <h5 class="card-title">${Name}</h5>
+          <p class="card-text">Appears in ${Titles} titles</p>
+          <a href="#" class="btn btn-dark"">See more</a>
+        </div>
+      </div>
+          `;
         actorsPageHTML += actorHTML;
       });
 

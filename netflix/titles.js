@@ -49,6 +49,31 @@ function fetchTitles(pageNumber) {
       titlesArray.forEach((title) => {
         const { Id, Name, Description } = title;
 
+        /*$.ajax({
+          url:
+            "https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=" +
+            encodeURIComponent(Name) +
+            "&callback=?%22",
+          type: "get",
+          success: (data) => {
+            //console.log(data);
+          },
+
+          error: (err) => {
+            console.log(err);
+          },
+        });*/
+        urlAPI =
+          "https://api.themoviedb.org/3/search/movie?api_key=a77315529945efa26b94400d99db398b&language=en-US&query=" +
+          encodeURIComponent(Name) +
+          "&page=1&include_adult=false";
+
+        $.getJSON(urlAPI, function (data) {
+          console.log(urlAPI);
+          console.log(data);
+          console.log(Name, encodeURIComponent(Name));
+        });
+
         const titleHTML = `
         <div class="card titleCard" style="; background-color:black">
         <img class="card-img-top" src="..." alt="Image Not Available">
