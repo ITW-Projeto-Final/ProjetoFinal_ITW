@@ -3,7 +3,6 @@ paginaAtual = 1;
 
 $(document).ready(function () {
   renderPagination(1);
-  fetchActors(1);
 });
 
 function previousPage() {
@@ -86,7 +85,7 @@ function fetchActors(pageNumber) {
     type: "get",
     data: {
       page: pageNumber,
-      pagesize: 50,
+      pagesize: 51,
     },
 
     success: (data) => {
@@ -94,14 +93,14 @@ function fetchActors(pageNumber) {
       actorsArray = data.Actors;
       let actorsPageHTML = ``;
 
-      actorsPageHTML = `<div class="actorsDiv">
+      actorsPageHTML = `<div class="actorCardsDiv">
       `;
       actorsArray.forEach((actor) => {
         const { Id, Name, Titles } = actor;
 
         const actorHTML = `
         <div class="card actorCard" style="; background-color:black">
-        <img class="card-img-top" src="..." alt="Image Not Available">
+        <img class="card-img-top" src="" alt="Image Not Available">
         <div class="card-body">
           <h5 class="card-title">${Name}</h5>
           <p class="card-text">Appears in ${Titles} titles</p>
