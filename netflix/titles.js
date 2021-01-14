@@ -51,7 +51,7 @@ function fetchTitles(pageNumber) {
 
         const titleHTML = `
         <div class="card titleCard" style="; background-color:black">
-        <img class="card-img-top" id="${Name}" src="" alt="Image Not Available">
+        <img class="card-img-top" id="${Name}" src="../images/ajaxLoader.gif" alt="Image Not Available">
         <div class="card-body">
           <h5 class="card-title">${Name}</h5>
           <p class="card-text">${Description}</p>
@@ -68,29 +68,41 @@ function fetchTitles(pageNumber) {
       var idPagination = "#pagination" + String(pageNumber);
       $(".pages.active").removeClass("active");
       $(idPagination).addClass("active");
+      fetchImages();
     },
     error: (err) => {
       console.log(err);
     },
   });
-  /*$(".card-img-top").attr("src") =
-  $.ajax({
-    type: "get",
-    url:
-      "https://api.themoviedb.org/3/search/movie?api_key=a77315529945efa26b94400d99db398b&language=en-US&query=" +
-      encodeURIComponent(Name) +
-      "&page=1&include_adult=true",
-    dataType: "json",
-    success: (data) => {
-      console.log(data);
-      if (data.results.length > 0) {
-        image_path =
-          "https://image.tmdb.org/t/p/original/" + data.results[0].poster_path;
-      } else {
-        console.log("NÃO POSSUI IMAGEM!");
-      }
-    },
-  });*/
+}
+function fetchImages() {
+  $(".card-img-top").each(function (i, obj) {
+    $.ajax({
+      type: "get",
+      url:
+        "https://api.themoviedb.org/3/search/movie?api_key=a77315529945efa26b94400d99db398b&language=en-US&query=" +
+        encodeURIComponent(obj.id) +
+        "&page=1&include_adult=true",
+      dataType: "json",
+      success: (data) => {
+        if (data.results.length > 0) {
+          if (data.results[0].poster_path != null) {
+            image_path =
+              "https://image.tmdb.org/t/p/original/" +
+              data.results[0].poster_path;
+            $(this).attr("src", image_path);
+            console.log("IF - FOUND:" + i, obj);
+          } else {
+            console.log("ELSE - NOT FOUND:" + i, obj);
+            $(this).attr("src", "../images/not-available.jfif");
+          }
+        } else {
+          console.log("ELSE - NOT FOUND:" + i, obj);
+          $(this).attr("src", "../images/not-available.jfif");
+        }
+      },
+    });
+  });
 }
 
 function renderPagination(paginationNumber) {
