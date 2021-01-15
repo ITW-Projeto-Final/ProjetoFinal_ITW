@@ -72,6 +72,8 @@
   transform-origin: center left;
   cursor: pointer;
   cursor: hand;
+  text-align: center;
+  font-size: 10px;
 }
 
 /* Add Extra Margin to Last Carousel Tile */

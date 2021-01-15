@@ -2,7 +2,7 @@ body {
   font-family: "Roboto", "Open Sans", sans-serif;
   padding-top: 72px;
   padding-bottom: 50px;
-  background-color: rgb(17, 16, 16);
+  background-color: black;
   color: white;
 }
 
@@ -13,6 +13,10 @@ i {
 .carousel-tile {
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+.second-div {
+  background-color: black;
 }
 
 .poster-Img {

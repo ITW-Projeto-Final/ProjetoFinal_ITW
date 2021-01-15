@@ -112,13 +112,13 @@ function renderSecondDiv(tvShowsArray) {
   const carouselHTML = `
     <div class="carousel">
     <div class="carousel-row">
-      <div id="${tvShowsArray[0].Name}" class="carousel-tile"></div>
-      <div id="${tvShowsArray[1].Name}" class="carousel-tile"> </div>
-      <div id="${tvShowsArray[2].Name}" class="carousel-tile"> </div>
-      <div id="${tvShowsArray[3].Name}" class="carousel-tile"> </div>
-      <div id="${tvShowsArray[4].Name}" class="carousel-tile"></div>
-      <div id="${tvShowsArray[5].Name}" class="carousel-tile"> </div>
-      <div id="${tvShowsArray[6].Name}" class="carousel-tile"> </div>
+      <div id="${tvShowsArray[0].Name}" class="carousel-tile">${tvShowsArray[0].Name}</div>
+      <div id="${tvShowsArray[1].Name}" class="carousel-tile">${tvShowsArray[1].Name} </div>
+      <div id="${tvShowsArray[2].Name}" class="carousel-tile">${tvShowsArray[2].Name} </div>
+      <div id="${tvShowsArray[3].Name}" class="carousel-tile">${tvShowsArray[3].Name} </div>
+      <div id="${tvShowsArray[4].Name}" class="carousel-tile">${tvShowsArray[4].Name}</div>
+      <div id="${tvShowsArray[5].Name}" class="carousel-tile">${tvShowsArray[5].Name} </div>
+      <div id="${tvShowsArray[6].Name}" class="carousel-tile">${tvShowsArray[6].Name} </div>
     </div>
     </div>
       `;
