@@ -1,3 +1,6 @@
+var moviesArray = [];
+var tvShowsArray = [];
+
 $(document).ready(() => {
   fetchInitial();
 });
@@ -22,35 +25,25 @@ function fetchInitial() {
         return 0;
       }
       titlesArray = data.Titles.sort(sortByDate);
-      moviesArray = [];
+      console.log(titlesArray);
       let i = 0;
       while (moviesArray.length < 7) {
         if (titlesArray[i].TypeName == "Movie")
           moviesArray.push(titlesArray[i]);
         i += 1;
       }
+
+      let j = 0;
+      while (tvShowsArray.length < 7) {
+        if (titlesArray[j].TypeName == "TV Show")
+          tvShowsArray.push(titlesArray[j]);
+        j += 1;
+      }
       console.log(moviesArray);
-      let initialPageHTML = ``;
+      console.log(tvShowsArray);
 
-      initialPageHTML = `<div class="">
-      `;
-
-      const carouselHTML = `
-        <div class="carousel">
-        <div class="carousel-row">
-          <div id="${moviesArray[0].Name}" class="carousel-tile"></div>
-          <div id="${moviesArray[1].Name}" class="carousel-tile"> </div>
-          <div id="${moviesArray[2].Name}" class="carousel-tile"> </div>
-          <div id="${moviesArray[3].Name}" class="carousel-tile"> </div>
-          <div id="${moviesArray[4].Name}" class="carousel-tile"></div>
-          <div id="${moviesArray[5].Name}" class="carousel-tile"> </div>
-          <div id="${moviesArray[6].Name}" class="carousel-tile"> </div>
-        </div>
-        </div>
-          `;
-      initialPageHTML += carouselHTML;
-
-      $("#first-div").append(initialPageHTML);
+      renderFirstDiv(moviesArray);
+      renderSecondDiv(tvShowsArray);
       fetchImages();
     },
     error: (err) => {
@@ -84,4 +77,52 @@ function fetchImages() {
       },
     });
   });
+}
+
+function renderFirstDiv(moviesArray) {
+  let initialPageHTML = ``;
+
+  initialPageHTML = `<div class="">
+  `;
+
+  const carouselHTML = `
+    <div class="carousel">
+    <div class="carousel-row">
+      <div id="${moviesArray[0].Name}" class="carousel-tile"></div>
+      <div id="${moviesArray[1].Name}" class="carousel-tile"> </div>
+      <div id="${moviesArray[2].Name}" class="carousel-tile"> </div>
+      <div id="${moviesArray[3].Name}" class="carousel-tile"> </div>
+      <div id="${moviesArray[4].Name}" class="carousel-tile"></div>
+      <div id="${moviesArray[5].Name}" class="carousel-tile"> </div>
+      <div id="${moviesArray[6].Name}" class="carousel-tile"> </div>
+    </div>
+    </div>
+      `;
+  initialPageHTML += carouselHTML;
+
+  $("#first-div").append(initialPageHTML);
+}
+
+function renderSecondDiv(tvShowsArray) {
+  let initialPageHTML = ``;
+
+  initialPageHTML = `<div class="">
+  `;
+
+  const carouselHTML = `
+    <div class="carousel">
+    <div class="carousel-row">
+      <div id="${tvShowsArray[0].Name}" class="carousel-tile"></div>
+      <div id="${tvShowsArray[1].Name}" class="carousel-tile"> </div>
+      <div id="${tvShowsArray[2].Name}" class="carousel-tile"> </div>
+      <div id="${tvShowsArray[3].Name}" class="carousel-tile"> </div>
+      <div id="${tvShowsArray[4].Name}" class="carousel-tile"></div>
+      <div id="${tvShowsArray[5].Name}" class="carousel-tile"> </div>
+      <div id="${tvShowsArray[6].Name}" class="carousel-tile"> </div>
+    </div>
+    </div>
+      `;
+  initialPageHTML += carouselHTML;
+
+  $("#second-div").append(initialPageHTML);
 }
