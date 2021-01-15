@@ -25,7 +25,7 @@ function renderPagination(paginationNumber) {
     type: "get",
     data: {
       page: paginationNumber,
-      pagesize: 50,
+      pagesize: 51,
     },
 
     success: (data) => {
