@@ -62,11 +62,20 @@ i {
 }
 
 .titles-main {
-  font-size: 30px;
+  font-size: 25px;
 }
 
 .titles-main.first {
   margin-top: 100px;
+}
+
+@media screen and (max-width: 653px) {
+  .titles-main.first {
+    font-size: 20px;
+  }
+  .titles-main {
+    font-size: 20px;
+  }
 }
 
 #alt-text {

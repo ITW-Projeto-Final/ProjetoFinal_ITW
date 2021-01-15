@@ -13,7 +13,7 @@
   --carousel-tile-height: 300px;
 
   /* Growth Factor */
-  --carousel-growth-factor: 2;
+  --carousel-growth-factor: 1.3;
 
   /* Fade to Opacity */
   --carousel-fade-opacity: 0.25;

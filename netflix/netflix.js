@@ -12,7 +12,6 @@ function fetchInitial() {
     },
 
     success: (data) => {
-      console.log(data);
       function sortByDate(a, b) {
         if (a.ReleaseYear > b.ReleaseYear) {
           return -1;
@@ -23,7 +22,14 @@ function fetchInitial() {
         return 0;
       }
       titlesArray = data.Titles.sort(sortByDate);
-      console.log(titlesArray);
+      moviesArray = [];
+      let i = 0;
+      while (moviesArray.length < 7) {
+        if (titlesArray[i].TypeName == "Movie")
+          moviesArray.push(titlesArray[i]);
+        i += 1;
+      }
+      console.log(moviesArray);
       let initialPageHTML = ``;
 
       initialPageHTML = `<div class="">
@@ -32,13 +38,13 @@ function fetchInitial() {
       const carouselHTML = `
         <div class="carousel">
         <div class="carousel-row">
-          <div id="${titlesArray[0].Name}" class="carousel-tile"></div>
-          <div id="${titlesArray[1].Name}" class="carousel-tile"> </div>
-          <div id="${titlesArray[2].Name}" class="carousel-tile"> </div>
-          <div id="${titlesArray[3].Name}" class="carousel-tile"> </div>
-          <div id="${titlesArray[4].Name}" class="carousel-tile"></div>
-          <div id="${titlesArray[5].Name}" class="carousel-tile"> </div>
-          <div id="${titlesArray[6].Name}" class="carousel-tile"> </div>
+          <div id="${moviesArray[0].Name}" class="carousel-tile"></div>
+          <div id="${moviesArray[1].Name}" class="carousel-tile"> </div>
+          <div id="${moviesArray[2].Name}" class="carousel-tile"> </div>
+          <div id="${moviesArray[3].Name}" class="carousel-tile"> </div>
+          <div id="${moviesArray[4].Name}" class="carousel-tile"></div>
+          <div id="${moviesArray[5].Name}" class="carousel-tile"> </div>
+          <div id="${moviesArray[6].Name}" class="carousel-tile"> </div>
         </div>
         </div>
           `;
