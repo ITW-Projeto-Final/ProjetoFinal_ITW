@@ -1,7 +1,13 @@
 $(document).ready(function () {
+  region_Id = 2; //EUA REGION
   //$(".navbar-collapse").css({
   //  maxHeight: $(document).height(50) - $(".navbar-header").height() + "px",
   //});
+  $(".region").click(function () {
+    region_Id = parseInt($(this).attr("value"));
+    console.log(region_Id);
+  });
+
   $("#src-btn").click(function (event) {
     event.preventDefault();
     //if($("#search-input").)

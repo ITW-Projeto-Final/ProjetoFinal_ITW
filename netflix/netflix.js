@@ -3,6 +3,7 @@ var tvShowsArray = [];
 
 $(document).ready(() => {
   fetchInitial();
+  fetchCountries();
 });
 
 function fetchInitial() {
@@ -27,14 +28,14 @@ function fetchInitial() {
       titlesArray = data.Titles.sort(sortByDate);
       console.log(titlesArray);
       let i = 0;
-      while (moviesArray.length < 7) {
+      while (moviesArray.length < 8) {
         if (titlesArray[i].TypeName == "Movie")
           moviesArray.push(titlesArray[i]);
         i += 1;
       }
 
       let j = 0;
-      while (tvShowsArray.length < 7) {
+      while (tvShowsArray.length < 8) {
         if (titlesArray[j].TypeName == "TV Show")
           tvShowsArray.push(titlesArray[j]);
         j += 1;
@@ -45,6 +46,24 @@ function fetchInitial() {
       renderFirstDiv(moviesArray);
       renderSecondDiv(tvShowsArray);
       fetchImages();
+    },
+    error: (err) => {
+      console.log(err);
+    },
+  });
+}
+
+function fetchCountries() {
+  $.ajax({
+    url: "http://192.168.160.58/netflix/api/Countries",
+    type: "get",
+    data: {
+      page: 1,
+      pagesize: 400,
+    },
+    success: (data) => {
+      console.log("COUNTRIES");
+      console.log(data);
     },
     error: (err) => {
       console.log(err);
@@ -119,6 +138,7 @@ function renderSecondDiv(tvShowsArray) {
       <div id="${tvShowsArray[4].Name}" class="carousel-tile">${tvShowsArray[4].Name}</div>
       <div id="${tvShowsArray[5].Name}" class="carousel-tile">${tvShowsArray[5].Name} </div>
       <div id="${tvShowsArray[6].Name}" class="carousel-tile">${tvShowsArray[6].Name} </div>
+      <div id="${tvShowsArray[7].Name}" class="carousel-tile">${tvShowsArray[7].Name} </div>
     </div>
     </div>
       `;
