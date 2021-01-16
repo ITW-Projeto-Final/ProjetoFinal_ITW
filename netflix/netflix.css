@@ -10,6 +10,10 @@ i {
   font-family: "Open Sans", sans-serif;
 }
 
+h6 {
+  font-weight: 800;
+}
+
 .carousel-tile {
   background-size: contain;
   background-repeat: no-repeat;
@@ -57,19 +61,18 @@ i {
 
 .titles-main {
   font-size: 25px;
-}
-
-.titles-main.first {
-  font-size: 25px;
   margin-top: 100px;
+  margin-left: 20px;
+  font-weight: bolder;
+  font-stretch: ultra-expanded;
 }
 
 @media screen and (max-width: 653px) {
-  .titles-main.first {
-    font-size: 20px;
-  }
   .titles-main {
+    margin-top: 200px;
     font-size: 20px;
+    font-weight: bolder;
+    font-stretch: ultra-expanded;
   }
 }
 
