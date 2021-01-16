@@ -1,12 +1,20 @@
-let moviesArray = [];
-let tvShowsArray = [];
-let arrayTitles = [];
+region_Id = 2;
 
 $(document).ready(() => {
   fetchInitial();
+  $(".region").click(function () {
+    region_Id = parseInt($(this).attr("value"));
+    $(".region.active").removeClass("active");
+    $(this).addClass("active");
+    fetchInitial();
+    console.log(region_Id);
+  });
 });
 
 function fetchInitial() {
+  let moviesArray = [];
+  let tvShowsArray = [];
+  let arrayTitles = [];
   $.ajax({
     url: "http://192.168.160.58/netflix/api/Countries",
     type: "get",
@@ -22,6 +30,7 @@ function fetchInitial() {
       arrayTitles.sort((a, b) => {
         return b.ReleaseYear - a.ReleaseYear;
       });
+      console.log("ENTRANDO REGION ID = " + region_Id);
       console.log(arrayTitles);
 
       let i = 0;
@@ -44,7 +53,6 @@ function fetchInitial() {
       console.log(tvShowsArray);
 
       renderFirstDiv(moviesArray);
-      renderSecondDiv(tvShowsArray);
       fetchImages();
     },
     error: (err) => {
@@ -64,7 +72,6 @@ function fetchImages() {
         "&page=1&include_adult=true",
       dataType: "json",
       success: (data) => {
-        console.log(data.results);
         if (data.results.length > 0) {
           if (data.results[0].poster_path != null) {
             image_path =
@@ -103,30 +110,5 @@ function renderFirstDiv(moviesArray) {
       `;
   initialPageHTML += carouselHTML;
 
-  $("#first-div").append(initialPageHTML);
-}
-
-function renderSecondDiv(tvShowsArray) {
-  let initialPageHTML = ``;
-
-  initialPageHTML = `<div class="">
-  `;
-
-  const carouselHTML = `
-    <div class="carousel">
-    <div class="carousel-row">
-      <div id="${tvShowsArray[0].Name}" class="carousel-tile">${tvShowsArray[0].Name}</div>
-      <div id="${tvShowsArray[1].Name}" class="carousel-tile">${tvShowsArray[1].Name} </div>
-      <div id="${tvShowsArray[2].Name}" class="carousel-tile">${tvShowsArray[2].Name} </div>
-      <div id="${tvShowsArray[3].Name}" class="carousel-tile">${tvShowsArray[3].Name} </div>
-      <div id="${tvShowsArray[4].Name}" class="carousel-tile">${tvShowsArray[4].Name}</div>
-      <div id="${tvShowsArray[5].Name}" class="carousel-tile">${tvShowsArray[5].Name} </div>
-      <div id="${tvShowsArray[6].Name}" class="carousel-tile">${tvShowsArray[6].Name} </div>
-      <div id="${tvShowsArray[7].Name}" class="carousel-tile">${tvShowsArray[7].Name} </div>
-    </div>
-    </div>
-      `;
-  initialPageHTML += carouselHTML;
-
-  $("#second-div").append(initialPageHTML);
+  $("#first-div").html(initialPageHTML);
 }

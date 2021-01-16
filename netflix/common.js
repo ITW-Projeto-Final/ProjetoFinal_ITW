@@ -1,13 +1,20 @@
 region_Id = 2; //EUA REGION
 $(document).ready(function () {
-  //$(".navbar-collapse").css({
-  //  maxHeight: $(document).height(50) - $(".navbar-header").height() + "px",
-  //});
   $(".region").click(function () {
     region_Id = parseInt($(this).attr("value"));
     $(".region.active").removeClass("active");
     $(this).addClass("active");
-    renderPagination(1);
+    //Executa se estiver em Titles ou Actors
+    if (
+      window.location.pathname == "/netflix/titles.html" ||
+      window.location.pathname == "/netflix/actors.html"
+    ) {
+      renderPagination(1);
+    }
+    //Executa se estiver na Index page
+    if (window.location.pathname == "/netflix/index.html") {
+      fetchInitial();
+    }
     console.log(region_Id);
   });
 
