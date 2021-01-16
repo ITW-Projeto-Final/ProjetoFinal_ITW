@@ -3,19 +3,20 @@ var tvShowsArray = [];
 
 $(document).ready(() => {
   fetchInitial();
-  fetchCountries();
 });
 
 function fetchInitial() {
   $.ajax({
-    url: "http://192.168.160.58/netflix/api/Titles",
+    url: "http://192.168.160.58/netflix/api/Countries",
     type: "get",
     data: {
+      id: region_Id,
       page: 1,
-      pagesize: 6234,
+      pagesize: 40,
     },
 
     success: (data) => {
+      console.log(data);
       function sortByDate(a, b) {
         if (a.ReleaseYear > b.ReleaseYear) {
           return -1;
@@ -26,44 +27,29 @@ function fetchInitial() {
         return 0;
       }
       titlesArray = data.Titles.sort(sortByDate);
-      console.log(titlesArray);
+      console.log(data.Titles);
+      console.log(titlesArray[0]);
       let i = 0;
-      while (moviesArray.length < 8) {
-        if (titlesArray[i].TypeName == "Movie")
-          moviesArray.push(titlesArray[i]);
-        i += 1;
-      }
+      // while (moviesArray.length < 8) {
+      //   if (titlesArray[i].TypeName == "Movie") {
+      //     moviesArray.push(titlesArray[i]);
+      //     i += 1;
+      //   }
+      // }
 
       let j = 0;
-      while (tvShowsArray.length < 8) {
-        if (titlesArray[j].TypeName == "TV Show")
-          tvShowsArray.push(titlesArray[j]);
-        j += 1;
-      }
+      // while (tvShowsArray.length < 8) {
+      //   if (titlesArray[j].TypeName == "TV Show") {
+      //     tvShowsArray.push(titlesArray[j]);
+      //     j += 1;
+      //   }
+      // }
       console.log(moviesArray);
       console.log(tvShowsArray);
 
       renderFirstDiv(moviesArray);
       renderSecondDiv(tvShowsArray);
       fetchImages();
-    },
-    error: (err) => {
-      console.log(err);
-    },
-  });
-}
-
-function fetchCountries() {
-  $.ajax({
-    url: "http://192.168.160.58/netflix/api/Countries",
-    type: "get",
-    data: {
-      page: 1,
-      pagesize: 400,
-    },
-    success: (data) => {
-      console.log("COUNTRIES");
-      console.log(data);
     },
     error: (err) => {
       console.log(err);
@@ -114,6 +100,7 @@ function renderFirstDiv(moviesArray) {
       <div id="${moviesArray[4].Name}" class="carousel-tile"></div>
       <div id="${moviesArray[5].Name}" class="carousel-tile"> </div>
       <div id="${moviesArray[6].Name}" class="carousel-tile"> </div>
+      <div id="${moviesArray[7].Name}" class="carousel-tile"> </div>
     </div>
     </div>
       `;

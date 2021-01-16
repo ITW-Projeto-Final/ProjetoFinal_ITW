@@ -1,10 +1,13 @@
+region_Id = 2; //EUA REGION
 $(document).ready(function () {
-  region_Id = 2; //EUA REGION
   //$(".navbar-collapse").css({
   //  maxHeight: $(document).height(50) - $(".navbar-header").height() + "px",
   //});
   $(".region").click(function () {
     region_Id = parseInt($(this).attr("value"));
+    $(".region.active").removeClass("active");
+    $(this).addClass("active");
+    renderPagination(1);
     console.log(region_Id);
   });
 

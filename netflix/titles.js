@@ -2,7 +2,6 @@
 paginaAtual = 1;
 $(document).ready(() => {
   renderPagination(1);
-  fetchTitles(1);
 });
 
 function searchTitle(searchText) {
@@ -34,9 +33,10 @@ function nextPage() {
 
 function fetchTitles(pageNumber) {
   $.ajax({
-    url: "http://192.168.160.58/netflix/api/Titles",
+    url: "http://192.168.160.58/netflix/api/Countries",
     type: "get",
     data: {
+      id: region_Id,
       page: pageNumber,
       pagesize: 51,
     },
@@ -108,60 +108,97 @@ function renderPagination(paginationNumber) {
   paginaAtual = paginationNumber;
 
   $.ajax({
-    url: "http://192.168.160.58/netflix/api/Titles",
+    url: "http://192.168.160.58/netflix/api/Countries",
     type: "get",
     data: {
+      id: region_Id,
       page: paginationNumber,
       pagesize: 51,
     },
 
     success: (data) => {
-      totalPages = data.TotalPages;
-      let paginationHTML = ``;
+      totalPages = 1;
+      $.ajax({
+        url: "http://192.168.160.58/netflix/api/Countries",
+        type: "get",
+        data: {
+          id: region_Id,
+        },
+        success: (data) => {
+          console.log(data);
+          console.log(data.Titles.length);
+          totalPages = parseInt(data.Titles.length / 51) + 1;
+          console.log("PAGINAS TOTAIS: " + totalPages);
+          let paginationHTML = ``;
 
-      paginationHTML = `<div class="pagination" id="paginacao">
-                        <a onclick='previousPage()'>&laquo;</a>`;
+          paginationHTML = `<div class="pagination" id="paginacao">
+                            <a onclick='previousPage()'>&laquo;</a>`;
 
-      //PAGINAÇÃO PARA AS 5 PRIMEIRAS PÁGINAS
-      for (var i = 1; i <= 5; i++) {
-        const pageHTML = `
-          <a class='pages' id='pagination${i}' onclick='renderPagination(${i})'>${i}</a>        
-        `;
-        paginationHTML += pageHTML;
-      }
-      paginationHTML += `
-      <a class='pages''>...</a>        
-    `;
+          if (totalPages < 15) {
+            for (var i = 1; i <= totalPages; i++) {
+              const pageHTML = `
+                <a class='pages' id='pagination${i}' onclick='renderPagination(${i})'>${i}</a>        
+              `;
+              paginationHTML += pageHTML;
+            }
+          }
 
-      if (paginationNumber >= 5 && paginationNumber < 115) {
-        for (var i = paginationNumber; i <= paginationNumber + 5; i++) {
-          const pageHTML = `
-            <a class='pages' id='pagination${i}' onclick='renderPagination(${i})'>${i}</a>        
-          `;
-          paginationHTML += pageHTML;
-        }
-      }
+          if (totalPages >= 15) {
+            for (var i = 1; i < 6; i++) {
+              const pageHTML = `
+                <a class='pages' id='pagination${i}' onclick='renderPagination(${i})'>${i}</a>        
+              `;
+              paginationHTML += pageHTML;
+            }
+            paginationHTML += "<a class='pages''>...</a>";
 
-      paginationHTML += `
-      <a class='pages''>...</a>        
-    `;
+            if (paginationNumber >= 5 && paginationNumber <= 46) {
+              if (paginationNumber == 5) {
+                i = paginationNumber + 1;
+                const pageHTML = `       
+                <a class='pages' id='pagination${i}' onclick='renderPagination(${i})'>${i}</a>        
+              `;
+                paginationHTML += pageHTML;
+              } else {
+                if (paginationNumber == 46) {
+                  i = paginationNumber;
+                  const pageHTML = `       
+                  <a class='pages' id='pagination${i}' onclick='renderPagination(${i})'>${i}</a>        
+                `;
+                  paginationHTML += pageHTML;
+                } else {
+                  h = paginationNumber;
+                  i = paginationNumber + 1;
+                  const pageHTML = `
+                <a class='pages' id='pagination${h}' onclick='renderPagination(${h})'>${h}</a>        
+                <a class='pages' id='pagination${i}' onclick='renderPagination(${i})'>${i}</a>        
+              `;
+                  paginationHTML += pageHTML;
+                }
+              }
+            }
+            paginationHTML += "<a class='pages''>...</a>";
+            for (var i = totalPages - 5; i <= totalPages; i++) {
+              const pageHTML = `
+                <a class='pages' id='pagination${i}' onclick='renderPagination(${i})'>${i}</a>        
+              `;
+              paginationHTML += pageHTML;
+            }
+          }
 
-      //PAGINAÇÃO PARA AS 5 ÚLTIMAS PÁGINAS
-      for (var i = totalPages - 5; i <= totalPages; i++) {
-        const pageHTML = `
-          <a class='pages' id='pagination${i}' onclick='renderPagination(${i})'>${i}</a>        
-        `;
-        paginationHTML += pageHTML;
-      }
-      paginationHTML += `<a onclick='nextPage()'>&raquo;</a>
-                        </div>`;
+          paginationHTML += `<a onclick='nextPage()'>&raquo;</a>
+                              </div>`;
 
-      $("#paginacao").html(paginationHTML);
+          $("#paginacao").html(paginationHTML);
 
-      fetchTitles(paginationNumber);
-      window.scrollTo(0, 0);
+          fetchTitles(paginationNumber);
+          window.scrollTo(0, 0);
+        },
+      });
     },
 
-    error: (err) => {},
+    error: (err) => {
+      console.log("ERRO => " + err);
+    },
   });
 }
