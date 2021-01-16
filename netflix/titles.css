@@ -23,6 +23,10 @@
   margin-left: 50px;
 }
 
+.btn-titles {
+  align-content: center;
+}
+
 .card-img-top {
   /*min-width: 322px;
   min-height: 483px;*/

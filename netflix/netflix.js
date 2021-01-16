@@ -1,5 +1,6 @@
-var moviesArray = [];
-var tvShowsArray = [];
+let moviesArray = [];
+let tvShowsArray = [];
+let arrayTitles = [];
 
 $(document).ready(() => {
   fetchInitial();
@@ -12,38 +13,33 @@ function fetchInitial() {
     data: {
       id: region_Id,
       page: 1,
-      pagesize: 40,
+      pagesize: 3000,
     },
 
     success: (data) => {
       console.log(data);
-      function sortByDate(a, b) {
-        if (a.ReleaseYear > b.ReleaseYear) {
-          return -1;
-        }
-        if (a.ReleaseYear < b.ReleaseYear) {
-          return 1;
-        }
-        return 0;
-      }
-      titlesArray = data.Titles.sort(sortByDate);
-      console.log(data.Titles);
-      console.log(titlesArray[0]);
+      arrayTitles = data.Titles;
+      arrayTitles.sort((a, b) => {
+        return b.ReleaseYear - a.ReleaseYear;
+      });
+      console.log(arrayTitles);
+
       let i = 0;
-      // while (moviesArray.length < 8) {
-      //   if (titlesArray[i].TypeName == "Movie") {
-      //     moviesArray.push(titlesArray[i]);
-      //     i += 1;
-      //   }
-      // }
+      while (moviesArray.length < 8) {
+        if (arrayTitles[i].TypeName == "Movie") {
+          moviesArray.push(arrayTitles[i]);
+        }
+        i += 1;
+      }
 
       let j = 0;
-      // while (tvShowsArray.length < 8) {
-      //   if (titlesArray[j].TypeName == "TV Show") {
-      //     tvShowsArray.push(titlesArray[j]);
-      //     j += 1;
-      //   }
-      // }
+      while (tvShowsArray.length < 8) {
+        if (arrayTitles[j].TypeName == "TV Show") {
+          tvShowsArray.push(arrayTitles[j]);
+        }
+        j += 1;
+      }
+
       console.log(moviesArray);
       console.log(tvShowsArray);
 
@@ -68,6 +64,7 @@ function fetchImages() {
         "&page=1&include_adult=true",
       dataType: "json",
       success: (data) => {
+        console.log(data.results);
         if (data.results.length > 0) {
           if (data.results[0].poster_path != null) {
             image_path =

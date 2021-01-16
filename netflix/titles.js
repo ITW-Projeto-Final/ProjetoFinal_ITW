@@ -56,7 +56,10 @@ function fetchTitles(pageNumber) {
         <div class="card-body">
           <h5 class="card-title">${Name}</h5>
           <p class="card-text">${Description}</p>
-          <a href="#" class="btn btn-dark"">Watch Now</a>
+          <label class="btn-titles">
+          <a href="#" class="btn btn-dark"">Trailer</a>
+          <a href="#" class="btn btn-dark"">Details</a>
+          </label>
         </div>
         </div>
           `;
