@@ -7,7 +7,6 @@ $(document).ready(() => {
     $(".region.active").removeClass("active");
     $(this).addClass("active");
     fetchInitial();
-    console.log(region_Id);
   });
 });
 
@@ -25,13 +24,10 @@ function fetchInitial() {
     },
 
     success: (data) => {
-      console.log(data);
       arrayTitles = data.Titles;
       arrayTitles.sort((a, b) => {
         return b.ReleaseYear - a.ReleaseYear;
       });
-      console.log("ENTRANDO REGION ID = " + region_Id);
-      console.log(arrayTitles);
 
       let i = 0;
       while (moviesArray.length < 8) {
@@ -49,9 +45,6 @@ function fetchInitial() {
         j += 1;
       }
 
-      console.log(moviesArray);
-      console.log(tvShowsArray);
-
       renderFirstDiv(moviesArray);
       fetchImages();
     },
@@ -63,7 +56,6 @@ function fetchInitial() {
 
 function fetchImages() {
   $(".carousel-tile").each(function (i, obj) {
-    console.log(obj.id);
     $.ajax({
       type: "get",
       url:

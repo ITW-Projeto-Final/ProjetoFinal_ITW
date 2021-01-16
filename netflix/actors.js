@@ -89,7 +89,6 @@ function fetchActors(pageNumber) {
     },
 
     success: (data) => {
-      console.log(data);
       actorsArray = data.Actors;
       let actorsPageHTML = ``;
 
@@ -100,7 +99,7 @@ function fetchActors(pageNumber) {
 
         const actorHTML = `
         <div class="card actorCard" style="; background-color:black">
-        <img class="card-img-top" src="" alt="Image Not Available">
+        <img class="card-img-top" id="${Name}" src="" alt="Image Not Available">
         <div class="card-body">
           <h5 class="card-title">${Name}</h5>
           <p class="card-text">Appears in ${Titles} titles</p>
@@ -117,9 +116,38 @@ function fetchActors(pageNumber) {
       var idPagination = "#pagination" + String(pageNumber);
       $(".pages.active").removeClass("active");
       $(idPagination).addClass("active");
+
+      fetchImages();
     },
     error: (err) => {
       console.log(err);
     },
+  });
+}
+
+function fetchImages() {
+  $(".card-img-top").each(function (i, obj) {
+    $.ajax({
+      type: "get",
+      url:
+        "https://api.themoviedb.org/3/search/person?api_key=a77315529945efa26b94400d99db398b&language=en-US&query=" +
+        encodeURIComponent(obj.id) +
+        "&page=1&include_adult=false",
+      dataType: "json",
+      success: (data) => {
+        if (data.results.length > 0) {
+          if (data.results[0].profile_path != null) {
+            image_path =
+              "https://image.tmdb.org/t/p/original/" +
+              data.results[0].profile_path;
+            $(this).attr("src", image_path);
+          } else {
+            $(this).attr("src", "../images/profile_ntFound.jpg");
+          }
+        } else {
+          $(this).attr("src", "../images/profile_ntFound.jpg");
+        }
+      },
+    });
   });
 }

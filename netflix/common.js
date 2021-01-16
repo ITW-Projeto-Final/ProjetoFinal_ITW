@@ -4,11 +4,8 @@ $(document).ready(function () {
     region_Id = parseInt($(this).attr("value"));
     $(".region.active").removeClass("active");
     $(this).addClass("active");
-    //Executa se estiver em Titles ou Actors
-    if (
-      window.location.pathname == "/netflix/titles.html" ||
-      window.location.pathname == "/netflix/actors.html"
-    ) {
+    //Executa se estiver em Titles
+    if (window.location.pathname == "/netflix/titles.html") {
       renderPagination(1);
     }
     //Executa se estiver na Index page

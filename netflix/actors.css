@@ -2,16 +2,18 @@
   width: 100%;
   margin-left: 0px;
   margin-right: 0px;
+  overflow: hidden;
 }
 @media screen and (min-width: 800px) {
   #actorsDiv {
     width: 100%;
     margin-left: 20px;
     margin-right: 0px;
+    overflow: hidden;
   }
 }
 
-.actorCard {
+.dropdownitem .actorCard {
   margin: 5px;
   flex-basis: 30%;
   text-align: center;
@@ -24,10 +26,10 @@
 }
 
 .card-img-top {
-  /*min-width: 322px;
-  min-height: 483px;*/
-  width: 100%;
-  height: auto;
+  width: 200px;
+  height: 300px;
+  /* width: 100%;
+  height: auto; */
   display: block;
   margin: auto;
 }
