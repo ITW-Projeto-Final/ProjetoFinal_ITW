@@ -104,3 +104,49 @@ function renderFirstDiv(moviesArray) {
 
   $("#first-div").html(initialPageHTML);
 }
+
+function renderSearch(word) {
+  console.log(word);
+  console.log(encodeURIComponent(word));
+  $.ajax({
+    url:
+      "http://192.168.160.58/netflix/api/Search/Titles?name=" +
+      encodeURIComponent(word),
+    type: "get",
+    data: {},
+
+    success: (data) => {
+      console.log(data);
+      console.log(data[0]);
+      let titlesPageHTML = ``;
+
+      titlesPageHTML = `<div class="titleCardsDiv">`;
+      data.forEach((title) => {
+        const { Id, Name, Description } = title;
+
+        const titleHTML = `
+        <div class="card titleCard" style="; background-color:black">
+        <img class="card-img-top" id="${Name}" src="../images/ajaxLoader.gif" alt="Image Not Available">
+         <div class="card-body">
+           <h5 class="card-title">${Name}</h5>
+          <p class="card-text">${Description}</p>
+          <label class="btn-titles">
+          <a href="#" class="btn btn-dark"">Trailer</a>
+          <a href="#" class="btn btn-dark"">Details</a>
+           </label>
+         </div>
+         </div>
+           `;
+        titlesPageHTML += titleHTML;
+      });
+
+      titlesPageHTML += "</div>";
+
+      $("#search-div").html(titlesPageHTML);
+      fetchSearchImages();
+    },
+    error: (err) => {
+      console.log(err);
+    },
+  });
+}
