@@ -82,6 +82,51 @@ function fetchImages() {
   });
 }
 
+function changeModal(title_id) {
+  $.ajax({
+    url: "http://192.168.160.58/netflix/api/Titles/" + title_id,
+    type: "get",
+    data: {},
+
+    success: (data) => {
+      console.log(data);
+      $("#modal-title").text(data.Name);
+      let content_table = ``;
+      let actors_table = `<td>`;
+      data.Actors.forEach((actor) => {
+        const { Id, Name } = actor;
+        actors_table += `${Name}`;
+        actors_table += `</br>`;
+      });
+      actors_table += "</td>";
+      content_table = `<table class="table table-striped">
+      <thead>
+        <tr>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Description</th>
+          <td>${data.Description}</td>
+        </tr>
+        <tr>
+          <th scope="row">Release Year:</th>
+          <td>${data.ReleaseYear}</td>
+        </tr>
+        <tr>
+          <th scope="row">Actors:</th>
+          ${actors_table}
+        </tr>
+      </tbody>
+    </table>`;
+      $("#modal-body").html(content_table);
+    },
+    error: (err) => {
+      console.log(err);
+    },
+  });
+}
+
 function renderFirstDiv(moviesArray) {
   let initialPageHTML = ``;
 
@@ -91,14 +136,38 @@ function renderFirstDiv(moviesArray) {
   const carouselHTML = `
     <div class="carousel">
     <div class="carousel-row">
-      <div id="${moviesArray[0].Name}" class="carousel-tile"></div>
-      <div id="${moviesArray[1].Name}" class="carousel-tile"> </div>
-      <div id="${moviesArray[2].Name}" class="carousel-tile"> </div>
-      <div id="${moviesArray[3].Name}" class="carousel-tile"> </div>
-      <div id="${moviesArray[4].Name}" class="carousel-tile"></div>
-      <div id="${moviesArray[5].Name}" class="carousel-tile"> </div>
-      <div id="${moviesArray[6].Name}" class="carousel-tile"> </div>
-      <div id="${moviesArray[7].Name}" class="carousel-tile"> </div>
+      <div id="${moviesArray[0].Name}" class="carousel-tile" 
+      onclick="changeModal(${moviesArray[0].Id})"
+        data-toggle="modal" 
+        data-target="#modalBox"></div>
+      <div id="${moviesArray[1].Name}" class="carousel-tile"
+      onclick="changeModal(${moviesArray[1].Id})"
+        data-toggle="modal" 
+        data-target="#modalBox"> </div>
+      <div id="${moviesArray[2].Name}" class="carousel-tile"
+      onclick="changeModal(${moviesArray[2].Id})"
+        data-toggle="modal" 
+        data-target="#modalBox"> </div>
+      <div id="${moviesArray[3].Name}" class="carousel-tile"
+      onclick="changeModal(${moviesArray[3].Id})"
+        data-toggle="modal" 
+        data-target="#modalBox"> </div>
+      <div id="${moviesArray[4].Name}" class="carousel-tile"
+      onclick="changeModal(${moviesArray[4].Id})"
+        data-toggle="modal" 
+        data-target="#modalBox"></div>
+      <div id="${moviesArray[5].Name}" class="carousel-tile"
+      onclick="changeModal(${moviesArray[5].Id})"
+        data-toggle="modal" 
+        data-target="#modalBox"> </div>
+      <div id="${moviesArray[6].Name}" class="carousel-tile"
+      onclick="changeModal(${moviesArray[6].Id})"
+        data-toggle="modal" 
+        data-target="#modalBox"> </div>
+      <div id="${moviesArray[7].Name}" class="carousel-tile"
+      onclick="changeModal(${moviesArray[7].Id})"
+        data-toggle="modal" 
+        data-target="#modalBox"> </div>
     </div>
     </div>
       `;
