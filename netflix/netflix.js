@@ -19,11 +19,11 @@ $(document).ready(() => {
     $(this).addClass("active");
     fetchInitial();
   });
+  $(".carousel-tile").click(function () {});
 });
 
 function fetchInitial() {
   let moviesArray = [];
-  let tvShowsArray = [];
   let arrayTitles = [];
   $.ajax({
     url: "http://192.168.160.58/netflix/api/Countries",
@@ -46,14 +46,6 @@ function fetchInitial() {
           moviesArray.push(arrayTitles[i]);
         }
         i += 1;
-      }
-
-      let j = 0;
-      while (tvShowsArray.length < 8) {
-        if (arrayTitles[j].TypeName == "TV Show") {
-          tvShowsArray.push(arrayTitles[j]);
-        }
-        j += 1;
       }
 
       renderFirstDiv(moviesArray);
