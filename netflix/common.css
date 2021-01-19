@@ -120,6 +120,10 @@ i {
   border-radius: 50%;
 }
 
+#modalBox {
+  color: black;
+}
+
 .dropdown-menu {
   background-color: black;
   left: -60px;

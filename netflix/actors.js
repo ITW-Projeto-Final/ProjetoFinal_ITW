@@ -103,7 +103,10 @@ function fetchActors(pageNumber) {
         <div class="card-body">
           <h5 class="card-title">${Name}</h5>
           <p class="card-text">Appears in ${Titles} titles</p>
-          <a href="#" class="btn btn-dark"">See more</a>
+          <a class="btn btn-dark"
+          data-toggle="modal" 
+          data-target="#modalBox"
+          onclick="changeModal(${Id})">See more</a>
         </div>
       </div>
           `;
@@ -180,7 +183,10 @@ function renderSearch(word) {
         <div class="card-body">
           <h5 class="card-title">${Name}</h5>
           <p class="card-text">Appears in ${Titles} titles</p>
-          <a href="#" class="btn btn-dark"">See more</a>
+          <a class="btn btn-dark"
+          onclick="changeModal(${Id})"
+          data-toggle="modal" 
+          data-target="#modalBox">See more</a>
         </div>
       </div>
           `;
@@ -222,5 +228,42 @@ function fetchSearchActorsImages() {
         }
       },
     });
+  });
+}
+
+function changeModal(actor_id) {
+  $.ajax({
+    url: "http://192.168.160.58/netflix/api/Actors/" + actor_id,
+    type: "get",
+    data: {},
+
+    success: (data) => {
+      console.log(data);
+      $("#modal-title").text(data.Name);
+      let content_table = ``;
+      let titles_table = `<td>`;
+      data.Titles.forEach((title) => {
+        const { Id, Name, ReleaseYear } = title;
+        titles_table += `${Name} (${ReleaseYear})`;
+        titles_table += `</br>`;
+      });
+      titles_table += "</td>";
+      content_table = `<table class="table table-striped">
+      <thead>
+        <tr>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Titles made:</th>
+          ${titles_table}
+        </tr>
+      </tbody>
+    </table>`;
+      $("#modal-body").html(content_table);
+    },
+    error: (err) => {
+      console.log(err);
+    },
   });
 }
