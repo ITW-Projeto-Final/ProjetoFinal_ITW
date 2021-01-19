@@ -1,9 +1,20 @@
-region_Id = 2;
-
 $(document).ready(() => {
+  if (sessionStorage.getItem("region_Id") == 2) {
+    $(".region.active").removeClass("active");
+    $("#flag2").addClass("active");
+  }
+  if (sessionStorage.getItem("region_Id") == 19) {
+    $(".region.active").removeClass("active");
+    $("#flag19").addClass("active");
+  }
+  if (sessionStorage.getItem("region_Id") == 11) {
+    $(".region.active").removeClass("active");
+    $("#flag11").addClass("active");
+  }
   fetchInitial();
   $(".region").click(function () {
-    region_Id = parseInt($(this).attr("value"));
+    reg = parseInt($(this).attr("value"));
+    sessionStorage.setItem("region_Id", reg);
     $(".region.active").removeClass("active");
     $(this).addClass("active");
     fetchInitial();
@@ -18,7 +29,7 @@ function fetchInitial() {
     url: "http://192.168.160.58/netflix/api/Countries",
     type: "get",
     data: {
-      id: region_Id,
+      id: sessionStorage.getItem("region_Id"),
       page: 1,
       pagesize: 3000,
     },

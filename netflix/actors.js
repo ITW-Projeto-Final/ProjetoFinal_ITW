@@ -69,7 +69,7 @@ function renderPagination(paginationNumber) {
       paginationHTML += `<a onclick='nextPage()'>&raquo;</a>
                   </div>`;
 
-      $("#paginacao").html(paginationHTML);
+      $("#paginacao-div").html(paginationHTML);
 
       fetchActors(paginationNumber);
       window.scrollTo(0, 0);
@@ -146,6 +146,79 @@ function fetchImages() {
           }
         } else {
           $(this).attr("src", "../images/profile_ntFound.jpg");
+        }
+      },
+    });
+  });
+}
+
+function renderSearch(word) {
+  console.log(word);
+  console.log(encodeURIComponent(word));
+  $.ajax({
+    url:
+      "http://192.168.160.58/netflix/api/Search/Actors?name=" +
+      encodeURIComponent(word),
+    type: "get",
+    data: {},
+
+    success: (data) => {
+      console.log(data);
+      console.log(data[0]);
+
+      actorsArray = data.Actors;
+      let actorsPageHTML = ``;
+
+      actorsPageHTML = `<div class="actorCardsDiv">
+      `;
+      data.forEach((actor) => {
+        const { Id, Name, Titles } = actor;
+
+        const actorHTML = `
+        <div class="card actorCard" style="; background-color:black">
+        <img class="card-img-top" id="${Name}" src="" alt="Image Not Available">
+        <div class="card-body">
+          <h5 class="card-title">${Name}</h5>
+          <p class="card-text">Appears in ${Titles} titles</p>
+          <a href="#" class="btn btn-dark"">See more</a>
+        </div>
+      </div>
+          `;
+        actorsPageHTML += actorHTML;
+      });
+
+      actorsPageHTML += "</div>";
+
+      $("#search-div").html(actorsPageHTML);
+      fetchImages();
+    },
+    error: (err) => {
+      console.log(err);
+    },
+  });
+}
+
+function fetchSearchActorsImages() {
+  $(".card-img-top").each(function (i, obj) {
+    $.ajax({
+      type: "get",
+      url:
+        "https://api.themoviedb.org/3/search/movie?api_key=a77315529945efa26b94400d99db398b&language=en-US&query=" +
+        encodeURIComponent(obj.id) +
+        "&page=1&include_adult=true",
+      dataType: "json",
+      success: (data) => {
+        if (data.results.length > 0) {
+          if (data.results[0].poster_path != null) {
+            image_path =
+              "https://image.tmdb.org/t/p/original/" +
+              data.results[0].poster_path;
+            $(this).attr("src", image_path);
+          } else {
+            $(this).attr("src", "../images/not-available.jpg");
+          }
+        } else {
+          $(this).attr("src", "../images/not-available.jpg");
         }
       },
     });

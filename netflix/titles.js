@@ -2,7 +2,24 @@
 paginaAtual = 1;
 $(document).ready(() => {
   renderPagination(1);
+  $(".region").click(function () {
+    reg = parseInt($(this).attr("value"));
+    sessionStorage.setItem("region_Id", reg);
+    renderPagination(1);
+  });
 });
+
+function doneTyping() {
+  $("#main-div").hide();
+  $("#paginacao-div").hide();
+  renderSearch($("#search-input").val());
+  $("#search-div").show();
+  if ($("#search-input").val() == "") {
+    $("#main-div").show();
+    $("#paginacao-div").show();
+    $("#search-div").hide();
+  }
+}
 
 function searchTitle(searchText) {
   $.ajax({
@@ -36,7 +53,7 @@ function fetchTitles(pageNumber) {
     url: "http://192.168.160.58/netflix/api/Countries",
     type: "get",
     data: {
-      id: region_Id,
+      id: sessionStorage.getItem("region_Id"),
       page: pageNumber,
       pagesize: 51,
     },
@@ -107,6 +124,7 @@ function fetchImages() {
 }
 
 function renderPagination(paginationNumber) {
+  console.log("executou render page");
   $("#loading").show();
   paginaAtual = paginationNumber;
 
@@ -114,7 +132,7 @@ function renderPagination(paginationNumber) {
     url: "http://192.168.160.58/netflix/api/Countries",
     type: "get",
     data: {
-      id: region_Id,
+      id: sessionStorage.getItem("region_Id"),
       page: paginationNumber,
       pagesize: 51,
     },
@@ -125,7 +143,7 @@ function renderPagination(paginationNumber) {
         url: "http://192.168.160.58/netflix/api/Countries",
         type: "get",
         data: {
-          id: region_Id,
+          id: sessionStorage.getItem("region_Id"),
         },
         success: (data) => {
           console.log(data);
@@ -192,7 +210,7 @@ function renderPagination(paginationNumber) {
           paginationHTML += `<a onclick='nextPage()'>&raquo;</a>
                               </div>`;
 
-          $("#paginacao").html(paginationHTML);
+          $("#paginacao-div").html(paginationHTML);
 
           fetchTitles(paginationNumber);
           window.scrollTo(0, 0);
@@ -202,6 +220,50 @@ function renderPagination(paginationNumber) {
 
     error: (err) => {
       console.log("ERRO => " + err);
+    },
+  });
+}
+
+function renderSearch(word) {
+  $.ajax({
+    url:
+      "http://192.168.160.58/netflix/api/Search/Titles?name=" +
+      encodeURIComponent(word),
+    type: "get",
+    data: {},
+
+    success: (data) => {
+      console.log(data);
+      console.log(data[0]);
+      let titlesPageHTML = ``;
+
+      titlesPageHTML = `<div class="titleCardsDiv">`;
+      data.forEach((title) => {
+        const { Id, Name, Description } = title;
+
+        const titleHTML = `
+        <div class="card titleCard" style="; background-color:black">
+        <img class="card-img-top" id="${Name}" src="../images/ajaxLoader.gif" alt="Image Not Available">
+         <div class="card-body">
+           <h5 class="card-title">${Name}</h5>
+          <p class="card-text">${Description}</p>
+          <label class="btn-titles">
+          <a href="#" class="btn btn-dark"">Trailer</a>
+          <a href="#" class="btn btn-dark"">Details</a>
+           </label>
+         </div>
+         </div>
+           `;
+        titlesPageHTML += titleHTML;
+      });
+
+      titlesPageHTML += "</div>";
+
+      $("#search-div").html(titlesPageHTML);
+      fetchSearchImages();
+    },
+    error: (err) => {
+      console.log(err);
     },
   });
 }

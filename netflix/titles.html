@@ -103,18 +103,18 @@
               <img class="drop-logo" src="../images/adult_1_logo.png" />
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item region active" value="2"
-              ><img class="drop-logo" src="../images/eua_flag2.png" />
-              USA
-            </a>
-            <a class="dropdown-item region" value="19"
-              ><img class="drop-logo" src="../images/br_flag3.jfif" />
-              BR
-            </a>
-            <a class="dropdown-item region" value="11"
-              ><img class="drop-logo" src="../images/au_flag.png" />
-              AU
-            </a>
+              <a class="dropdown-item region active" id="flag2" value="2"
+                ><img class="drop-logo" src="../images/eua_flag2.png" />
+                USA
+              </a>
+              <a class="dropdown-item region" id="flag19" value="19"
+                ><img class="drop-logo" src="../images/br_flag3.jfif" />
+                BR
+              </a>
+              <a class="dropdown-item region" id="flag11" value="11"
+                ><img class="drop-logo" src="../images/au_flag.png" />
+                AU
+              </a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#">Account</a>
               <a class="dropdown-item" href="#">Help</a>
@@ -126,19 +126,16 @@
     </nav>
 
     <div id="loading">
-      <img
-        id="loading-image"
-        src=""
-        alt="Loading..."
-      />
+      <img id="loading-image" src="" alt="Loading..." />
     </div>
 
-      <div class="container-fluid">
-        <div id="titlesDiv"></div>
-      </div>
-
-      <div class="pagination" id="paginacao"></div>
+    <div class="container-fluid" id="main-div">
+      <div id="titlesDiv"></div>
     </div>
+
+    <div class="pagination" id="paginacao-div"></div>
+
+    <div id="search-div"></div>
     <nav class="navbar navbar-dark navbar-expand-md fixed-bottom">
       <div class="container-fluid">
         <div class="navbar-text small">

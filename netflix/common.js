@@ -1,21 +1,25 @@
-region_Id = 2; //EUA REGION
 var typingTimer; //timer identifier
 var doneTypingInterval = 1500; //1.5 segundos após o fim da digitação
+
 $(document).ready(function () {
   $("#search-div").hide();
+  if (sessionStorage.getItem("region_Id") == 2) {
+    $(".region.active").removeClass("active");
+    $("#flag2").addClass("active");
+  }
+  if (sessionStorage.getItem("region_Id") == 19) {
+    $(".region.active").removeClass("active");
+    $("#flag19").addClass("active");
+  }
+  if (sessionStorage.getItem("region_Id") == 11) {
+    $(".region.active").removeClass("active");
+    $("#flag11").addClass("active");
+  }
   $(".region").click(function () {
-    region_Id = parseInt($(this).attr("value"));
+    reg = parseInt($(this).attr("value"));
+    sessionStorage.setItem("region_Id", reg);
     $(".region.active").removeClass("active");
     $(this).addClass("active");
-    //Executa se estiver em Titles
-    if (window.location.pathname == "/netflix/titles.html") {
-      renderPagination(1);
-    }
-    //Executa se estiver na Index page
-    if (window.location.pathname == "/netflix/index.html") {
-      fetchInitial();
-    }
-    console.log(region_Id);
   });
 
   $("#src-btn").click(function (event) {
@@ -31,7 +35,6 @@ $(document).ready(function () {
     $("#src-logo-1").css("display", "none");
     $("#src-logo-2").css("display", "block");
   });
-
   $("#search-input").keyup(function () {
     clearTimeout(typingTimer);
     typingTimer = setTimeout(doneTyping, doneTypingInterval);
@@ -40,14 +43,25 @@ $(document).ready(function () {
   $("#search-input").keydown(function () {
     clearTimeout(typingTimer);
   });
-
+  $("#search-input").on("search", function (evt) {
+    if ($(this).val().length == 0) {
+      $("#search-div").hide();
+      $("#main-div").show();
+      $("#paginacao-div").show();
+      $("#actorsDiv").show();
+    }
+  });
   function doneTyping() {
     $("#main-div").hide();
+    $("#paginacao-div").hide();
+    $("#actorsDiv").hide();
     renderSearch($("#search-input").val());
     $("#search-div").show();
     if ($("#search-input").val() == "") {
-      $("#main-div").show();
       $("#search-div").hide();
+      $("#main-div").show();
+      $("#paginacao-div").show();
+      $("#actorsDiv").show();
     }
   }
 
