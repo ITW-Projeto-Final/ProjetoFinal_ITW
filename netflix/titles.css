@@ -23,6 +23,10 @@
   margin-left: 50px;
 }
 
+#modalBox {
+  color: black;
+}
+
 .favorite-icon {
   width: 20px;
   height: 20px;

@@ -7,8 +7,36 @@ $(document).ready(() => {
     sessionStorage.setItem("region_Id", reg);
     renderPagination(1);
   });
-  $(".btn-trailer").click(function () {});
 });
+
+function changeModal(title_id) {}
+
+function showDetails() {
+  console.log("CLICK");
+  modalDiv = ``;
+  modalDiv = `<div class="modal" tabindex="-1" role="dialog" id="modalBox">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+  // $("#modal-div").html(modalDiv);
+  // $("#modalBox").modal("show");
+}
 
 function doneTyping() {
   $("#main-div").hide();
@@ -82,7 +110,12 @@ function fetchTitles(pageNumber) {
           class="btn btn-dark btn-trailer">
           Trailer
           </a>
-          <a id="${Id}" class="btn btn-dark btn-details">Details</a>
+          <a id="${Id}" 
+          class="btn btn-dark btn-details" 
+          onclick="changeModal(${Id})"
+          data-toggle="modal" 
+          data-target="#modalBox"
+          >Details</a>
           </label>
         </div>
         </div>
@@ -263,7 +296,7 @@ function renderSearch(word) {
           class="btn btn-dark btn-trailer">
           Trailer
           </a>
-          <a class="btn btn-dark"">Details</a>
+          <a class="btn btn-dark btn-details">Details</a>
            </label>
          </div>
          </div>

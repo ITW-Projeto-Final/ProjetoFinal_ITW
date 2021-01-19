@@ -19,7 +19,9 @@ $(document).ready(() => {
     $(this).addClass("active");
     fetchInitial();
   });
-  $(".carousel-tile").click(function () {});
+  $(".link").click(function () {
+    console.log("CLICK CAROUSEL");
+  });
 });
 
 function fetchInitial() {
