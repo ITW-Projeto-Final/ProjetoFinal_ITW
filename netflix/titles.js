@@ -7,6 +7,7 @@ $(document).ready(() => {
     sessionStorage.setItem("region_Id", reg);
     renderPagination(1);
   });
+  $(".btn-trailer").click(function () {});
 });
 
 function doneTyping() {
@@ -66,7 +67,6 @@ function fetchTitles(pageNumber) {
       titlesPageHTML = `<div class="titleCardsDiv">`;
       titlesArray.forEach((title) => {
         const { Id, Name, Description } = title;
-
         const titleHTML = `
         <div class="card titleCard" style="; background-color:black">
         <img class="card-img-top" id="${Name}" src="../images/ajaxLoader.gif" alt="Image Not Available">
@@ -74,8 +74,15 @@ function fetchTitles(pageNumber) {
           <h5 class="card-title">${Name}</h5>
           <p class="card-text">${Description}</p>
           <label class="btn-titles">
-          <a href="#" class="btn btn-dark"">Trailer</a>
-          <a href="#" class="btn btn-dark"">Details</a>
+          <a id="${Id}" 
+          href="https://www.youtube.com/results?search_query=${encodeURIComponent(
+            Name
+          )}+official trailer" 
+          target="_blank"
+          class="btn btn-dark btn-trailer">
+          Trailer
+          </a>
+          <a id="${Id}" class="btn btn-dark btn-details">Details</a>
           </label>
         </div>
         </div>
@@ -248,8 +255,15 @@ function renderSearch(word) {
            <h5 class="card-title">${Name}</h5>
           <p class="card-text">${Description}</p>
           <label class="btn-titles">
-          <a href="#" class="btn btn-dark"">Trailer</a>
-          <a href="#" class="btn btn-dark"">Details</a>
+          <a id="${Id}" 
+          href="https://www.youtube.com/results?search_query=${encodeURIComponent(
+            Name
+          )}+official trailer" 
+          target="_blank"
+          class="btn btn-dark btn-trailer">
+          Trailer
+          </a>
+          <a class="btn btn-dark"">Details</a>
            </label>
          </div>
          </div>

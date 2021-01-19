@@ -23,6 +23,11 @@
   margin-left: 50px;
 }
 
+.favorite-icon {
+  width: 20px;
+  height: 20px;
+}
+
 .btn-titles {
   align-content: center;
 }
