@@ -9,33 +9,49 @@ $(document).ready(() => {
   });
 });
 
-function changeModal(title_id) {}
+function changeModal(title_id) {
+  $.ajax({
+    url: "http://192.168.160.58/netflix/api/Titles/" + title_id,
+    type: "get",
+    data: {},
 
-function showDetails() {
-  console.log("CLICK");
-  modalDiv = ``;
-  modalDiv = `<div class="modal" tabindex="-1" role="dialog" id="modalBox">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save changes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-  // $("#modal-div").html(modalDiv);
-  // $("#modalBox").modal("show");
+    success: (data) => {
+      console.log(data);
+      $("#modal-title").text(data.Name);
+      let content_table = ``;
+      let actors_table = `<td>`;
+      data.Actors.forEach((actor) => {
+        const { Id, Name } = actor;
+        actors_table += `${Name}`;
+        actors_table += `</br>`;
+      });
+      actors_table += "</td>";
+      content_table = `<table class="table table-striped">
+      <thead>
+        <tr>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Description</th>
+          <td>${data.Description}</td>
+        </tr>
+        <tr>
+          <th scope="row">Release Year:</th>
+          <td>${data.ReleaseYear}</td>
+        </tr>
+        <tr>
+          <th scope="row">Actors:</th>
+          ${actors_table}
+        </tr>
+      </tbody>
+    </table>`;
+      $("#modal-body").html(content_table);
+    },
+    error: (err) => {
+      console.log(err);
+    },
+  });
 }
 
 function doneTyping() {
@@ -296,7 +312,10 @@ function renderSearch(word) {
           class="btn btn-dark btn-trailer">
           Trailer
           </a>
-          <a class="btn btn-dark btn-details">Details</a>
+          <a class="btn btn-dark btn-details"
+          data-toggle="modal" 
+          data-target="#modalBox"
+          onclick="changeModal(${Id})">Details</a>
            </label>
          </div>
          </div>

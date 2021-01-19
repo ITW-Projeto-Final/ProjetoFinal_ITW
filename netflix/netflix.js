@@ -19,9 +19,6 @@ $(document).ready(() => {
     $(this).addClass("active");
     fetchInitial();
   });
-  $(".link").click(function () {
-    console.log("CLICK CAROUSEL");
-  });
 });
 
 function fetchInitial() {
